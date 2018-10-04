@@ -1,0 +1,34 @@
+body{
+    
+    /*background-image: url("a.JPG");
+    background-color: aqua;
+    background-repeat: repeat-y*
+    background-image: linear-gradient(-60deg, rgba(109, 109, 159, 0.158),red, #82F089, purple)*/
+    background-image: radial-gradient(circle, tomato 10%, olive 30%)
+}
+
+#first{
+    height: 400px;
+    width: 400px;
+    background:slategray;
+    /*border-left:8px double maroon;*/
+    border:4px solid tomato;
+    margin:auto;
+    border-radius: 50%;
+    position: relative;
+}
+
+#second{
+    height: 200px;
+    width: 200px;
+    background:slategray;
+    /*border-left:8px double maroon*/
+    border:4px solid tomato;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20%;
+    margin-bottom: auto;
+    padding: 10px;
+    position: relative;
+    text-align: center;
+}

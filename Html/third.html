@@ -1,0 +1,40 @@
+<form action="#"  method="POST">
+    <fieldset>
+        <legend>Employee Form</legend>
+        <label for="fname">FirstName</label>
+        <input type="text" name="fname" id="fname"
+                placeholder="FirstName" required/><br/>
+        <label for="lname">LastName</label>
+        <input type="text" name="lname" id="lname"
+                placeholder="lastName"/><br/>
+        Email:<input type="email" placeholder="a@a.cpm"/><br>
+        Password:<input type="password"/><br/>
+        Date:<input type="date" /><br/>
+        upload:<input type="file"/><br/>
+        URL:<input type="url"/><br/>
+        Color:<input type="color"/><br/>
+        <label for="female">Female</label>
+        <input type="radio" value="female" name="gender"
+                id="female"/>
+        <label for="male">Male</label>
+        <input type="radio" value="male" name="gender"
+                        id="male"/><br/>
+        <input list="country">
+        <datalist id="country">
+            <option>India</option>
+            <option>Indonesia</option>
+            <option>United Kingdom</option>
+        </datalist>
+        NodejS:<input type="checkbox"/>
+        AngularJs:<input type="checkbox"/>
+        ReactJS:<input type="checkbox"/><br/>
+        Comments:<textarea></textarea><br/>
+        <select>
+            <option>London</option>
+            <option> New York</option>
+            <option>Amsterdam</option>
+        </select><br/>
+        <button type="submit" value="Submit">Submit</button>
+        <button type="reser" value="reset">Resset</button>
+    </fieldset>
+</form>

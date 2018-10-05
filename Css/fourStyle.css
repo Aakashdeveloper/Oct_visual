@@ -16,6 +16,10 @@ body{
     margin:auto;
     border-radius: 50%;
     position: relative;
+    box-shadow: 15px 15px teal;
+    opacity: 1;
+    transition: width 5s;
+    z-index: 100
 }
 
 #second{
@@ -30,5 +34,32 @@ body{
     margin-bottom: auto;
     padding: 10px;
     position: relative;
-    text-align: center;
+
+    
+    display: flex;
+    justify-content: center;
+    overflow: scroll;
+    visibility: visible;
+    transform: scale(.5);
+    z-index: 10;
+
+}
+
+#second:hover{
+    text-shadow: 10px 10px blue;
+    font-size: 40px;
+    
+}
+
+@media(max-width:200px){
+
+}
+
+@media(max-width:400px){
+
+}
+
+#first:hover{
+    width: 600px;
+   /*transform: rotate(300deg)*/
 }

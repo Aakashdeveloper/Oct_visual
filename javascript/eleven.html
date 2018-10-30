@@ -1,0 +1,29 @@
+<html>
+    <head>
+        <title>Calculator</title>
+        <script>
+            function calc(opt){
+                var a = document.getElementById('first').value;
+                var b = document.getElementById('second').value;
+                if(opt == "add"){
+                    out = parseInt(a)+ parseInt(b)
+                    document.getElementById('output').innerHTML = out
+                } else if(opt == 'sub'){
+                    out = parseInt(a) - parseInt(b)
+                    document.getElementById('output').innerHTML = out
+                }
+
+                if(isNaN(out) == true){
+                    document.getElementById('output').innerHTML  = "Please enter valid input"
+                }
+            }
+        </script>
+    </head>
+    <body>
+        <input id="first" type="text" placeholder="input1">
+        <input id="second" type="text" placeholder="input2"><br/>
+        <input type="button" value="++++++" onclick = "calc('add')"/>
+        <input type="button" value="------" onclick = "calc('sub')"/>
+        <h1 id="output"></h1>
+    </body>
+</html>

@@ -1,0 +1,20 @@
+<html>
+    <head>
+        <title>Blur</title>
+        
+
+    </head>
+    <body>
+        <input type="text"/ onblur="titleCaseMe()" id="fname">
+        <input type="text" />
+
+        <script>
+            function titleCaseMe(){
+                let name = document.getElementById('fname').value
+                    name = name.charAt(0).toUpperCase()+name.slice(1).toLowerCase()
+                    console.log(name)
+                    document.getElementById('fname').value=name
+            }
+        </script>
+    </body>
+</html>

@@ -5,53 +5,23 @@ import morgan from 'morgan';
 
 let app = express();
 
-app.use(morgan('tiny'))
+
+app.use(morgan('tiny'));
+app.use(express.static(__dirname + '/public'));
+app.set('views', './src/views');
+app.set('view engine', 'ejs');
+
+var navarray = [{link:'/', title:'Home'},
+                {link:'/movies', title:'Movies'}]
+
+let moviesRouter = require('./src/routes/moviesRoute')(navarray);
 
 app.get('/',(req,res) => {
-    res.send("<h1>Welcome to express</h1>")
+    res.render('index',{title:'Home Page', nav:navarray})
 });
 
-app.get('/home',(req,res) => {
-    res.send("<h1>Welcome to Home Page</h1>")
-});
-
-
+app.use('/movies', moviesRouter);
 
 app.listen(2300,(err) => {
     console.log(`server running on port ${chalk.blue('2300')}`);
 });
-
-
-
-/*
-ES=> Ecma Script
-Es5
-function add(a,b){
-    return a+b
-}
-Es6
-var add = (a,b) => {
-    return a+b
-}
-let express = require('express');
-let app = express();
-
-app.get('/', function(req,res){
-    res.send("Welcome to express")
-});
-
-app.get('/home', function(req,res){
-    res.send("<h1>Welcome to Home Page</h1>")
-});
-
-
-
-app.listen(2300,function(err){
-    console.log("server running on port "+2300);
-});
-
-var a =10
-var b = "my age is "+10
-var b = `my age is ${a}`
-
-*/

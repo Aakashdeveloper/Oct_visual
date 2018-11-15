@@ -1,0 +1,163 @@
+import express from 'express';
+import chalk from 'chalk';
+let debug = require('debug')('app');
+import morgan from 'morgan';
+
+let app = express();
+let moviesRouter = express.Router();
+let booksRouter = express.Router();
+
+app.use(morgan('tiny'));
+app.use(express.static(__dirname + '/public'));
+app.set('views', './src/views');
+app.set('view engine', 'ejs');
+
+let movies = [
+    {
+      "_id": "5ab12612f36d2879268f284a",
+      "name": "Black Panther",
+      "language": "ENGLISH",
+      "rate": 4.5,
+      "type": "Action Adventure Fantasy",
+      "imageUrl": "https://image.ibb.co/f0hhZc/bp.jpg"
+    },
+    {
+      "_id": "5ab12666f36d2879268f2902",
+      "name": "Death Wish",
+      "language": "ENGLISH",
+      "type": "Action Crime Thriller",
+      "rate": 3.2,
+      "imageUrl": "https://image.ibb.co/gC9PfH/dw.jpg"
+    },
+    {
+      "_id": "5ab12678f36d2879268f291d",
+      "name": "Coco",
+      "language": "ENGLISH",
+      "type": "Adventure Animation Family",
+      "rate": 5,
+      "imageUrl": "https://image.ibb.co/dQwWSx/coco.jpg"
+    },
+    {
+      "_id": "5ab126b6f36d2879268f2943",
+      "name": "Avengers",
+      "language": "ENGLISH",
+      "type": "Actione",
+      "rate": 2,
+      "imageUrl": "https://www.hindustantimes.com/rf/image_size_960x540/HT/p2/2018/04/01/Pictures/_46a0b2c0-3590-11e8-8c5f-3c6cc031651e.jpg"
+    },
+    {
+      "_id": "5ab4e66b0c1d2b27846c6407",
+      "name": "Black Friday",
+      "language": "ENGLISH",
+      "rate": 4.5,
+      "type": "Action Adventure Fantasy",
+      "imageUrl": "https://image.ibb.co/f0hhZc/bp.jpg"
+    }
+]
+
+var navarray = [{link:'/', title:'Home'},
+                {link:'/movies', title:'Movies'}]
+
+app.get('/',(req,res) => {
+    res.render('index',{title:'Home Page', nav:navarray})
+});
+
+moviesRouter.route('/')
+    .get((req,res) => {
+        res.render('movies',
+            {title:'Movies Page', 
+             nav:navarray,
+             movies})
+    });
+
+moviesRouter.route('/details')
+    .get((req,res) => {
+        res.render('movies',
+            {title:'Details Page', 
+             nav:navarray,
+             movies})
+    });
+
+
+booksRouter.route('/')
+    .get((req,res) => {
+        res.send("<h1>Books Page</h1>")
+    })
+
+booksRouter.route('/details')
+    .get((req,res) => {
+        res.send("<h1>Books Details Page</h1>")
+    })
+
+
+app.use('/movies', moviesRouter);
+app.use('/books', booksRouter)
+
+
+
+app.listen(2300,(err) => {
+    console.log(`server running on port ${chalk.blue('2300')}`);
+});
+
+
+
+/*
+ES=> Ecma Script
+Es5
+function add(a,b){
+    return a+b
+}
+Es6
+var add = (a,b) => {
+    return a+b
+}
+let express = require('express');
+let app = express();
+
+app.get('/', function(req,res){
+    res.send("Welcome to express")
+});
+
+app.get('/home', function(req,res){
+    res.send("<h1>Welcome to Home Page</h1>")
+});
+
+
+
+app.listen(2300,function(err){
+    console.log("server running on port "+2300);
+});
+
+var a =10
+var b = "my age is "+10
+var b = `my age is ${a}`
+
+handlebar
+swig
+vash
+jade
+ejs
+
+
+app.get('/movies',(req,res) => {
+    res.render('movies',
+            {title:'Movies Page', 
+             nav:navarray,
+             movies})
+});
+
+app.get('/details',(req,res) => {
+    res.render('movies',
+            {title:'Details Page', 
+             nav:navarray,
+             movies})
+});
+
+app.get('/books',(req,res) => {
+    res.send("<h1>Books Page</h1>")
+});
+
+app.get('/details',(req,res) => {
+    res.send("<h1>Books Details Page</h1>")
+});
+*/

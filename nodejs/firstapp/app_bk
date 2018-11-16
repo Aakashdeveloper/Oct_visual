@@ -161,3 +161,33 @@ app.get('/details',(req,res) => {
     res.send("<h1>Books Details Page</h1>")
 });
 */
+
+
+
+
+
+S.No  |   Hindi  |   English |  Sports
+
+1     |    80    |           |
+2     |          |    80     |
+3     |          |           |    90
+
+
+
+{
+    S.No:1,
+    hindi:80
+},
+{
+    S.No:2,
+    English: 80
+},
+{
+    S.No:3
+    Sports:90
+}
+
+
+database   =      database
+table      =      collections
+row        =      document

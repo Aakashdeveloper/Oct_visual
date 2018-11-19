@@ -1,0 +1,72 @@
+db.third.update({color:'slateGray'},
+                {$set:{shade:'light'}},
+                {multi:true,upsert:true})
+
+db.third.remove({color:'slateGray'})
+db.products.find({}).sort({"price":1}).skip(2).limit(2).pretty()
+
+db.four.drop()
+
+
+crud
+
+aggregation
+
+$project=> way to define
+$match=> having clause
+$group=> combine the things
+$sort=> in order
+$skip=> skip first few records
+$limit=> total number of output
+
+db.products.aggregate([
+    {
+        $group:
+        {
+            _id:"$manufacturer",
+            num_products:{$sum:1}
+        }
+    }
+])
+
+
+db.products.aggregate([
+    {
+        $group:
+        {
+            _id:"$category",
+            total_price:{$avg:"$price"}
+        }
+    },
+    {
+        $sort:{total_price:-1}
+    }
+])
+
+
+db.products.aggregate([
+    {
+        $project:
+        {
+            _id:0,
+            'maker':{$toLower:"$manufacturer"},
+            'item':"$name",
+            'details':{'category':'$category',
+                        'price':{'$multiply':["$price",10]}}
+        }
+    },
+    {
+        $group:
+        {
+            _id:"$maker",
+            total_price:{$avg:"$details.price"}
+        }
+    },
+    {
+        $sort:{total_price:1}
+    },
+    {$skip: 1},
+    {$limit: 2}
+    
+])
+

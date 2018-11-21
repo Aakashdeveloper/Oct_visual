@@ -1,71 +1,78 @@
 import express from 'express';
+import MongoClient from 'mongodb';
+import 'babel-polyfill';
 
 let moviesRouter = express.Router();
-
-let movies = [
-    {
-      "_id": "5ab12612f36d2879268f284a",
-      "name": "Black Panther",
-      "language": "ENGLISH",
-      "rate": 4.5,
-      "type": "Action Adventure Fantasy",
-      "imageUrl": "https://image.ibb.co/f0hhZc/bp.jpg"
-    },
-    {
-      "_id": "5ab12666f36d2879268f2902",
-      "name": "Death Wish",
-      "language": "ENGLISH",
-      "type": "Action Crime Thriller",
-      "rate": 3.2,
-      "imageUrl": "https://image.ibb.co/gC9PfH/dw.jpg"
-    },
-    {
-      "_id": "5ab12678f36d2879268f291d",
-      "name": "Coco",
-      "language": "ENGLISH",
-      "type": "Adventure Animation Family",
-      "rate": 5,
-      "imageUrl": "https://image.ibb.co/dQwWSx/coco.jpg"
-    },
-    {
-      "_id": "5ab126b6f36d2879268f2943",
-      "name": "Avengers",
-      "language": "ENGLISH",
-      "type": "Actione",
-      "rate": 2,
-      "imageUrl": "https://www.hindustantimes.com/rf/image_size_960x540/HT/p2/2018/04/01/Pictures/_46a0b2c0-3590-11e8-8c5f-3c6cc031651e.jpg"
-    },
-    {
-      "_id": "5ab4e66b0c1d2b27846c6407",
-      "name": "Black Friday",
-      "language": "ENGLISH",
-      "rate": 4.5,
-      "type": "Action Adventure Fantasy",
-      "imageUrl": "https://image.ibb.co/f0hhZc/bp.jpg"
-    }
-]
 
 function router(nav){
     moviesRouter.route('/')
         .get((req,res) => {
-            res.render('movies',
-                {title:'Movies Page', 
-                nav,
-                movies})
-            });
+            const url = 'mongodb://localhost:27017';
+            const dbName = 'acadgild_aug';
+            (async function mongo(){
+                let client;
+                try{
+                    client = await MongoClient.connect(url);
+                    const db = client.db(dbName);
+
+                    const col = await db.collection('books');
+                    const movies = await col.find().toArray();
+                    res.render('movies',
+                        {title:'Movies Page', 
+                        nav,
+                        movies})
+                }
+                catch(err){
+                    console.log(err)
+                }
+                client.close();
+            }())
+
+        })
             
     moviesRouter.route('/:id')
         .get((req,res) => {
             const {id} = req.params;
-            res.render('movies',
-                {title:'Details Page for '+ id, 
-                nav:nav,
-                movies})
-            });
+            const url = 'mongodb://localhost:27017';
+            const dbName = 'acadgild_aug';
+            (async function mongo(){
+                let client;
+                try{
+                    client = await MongoClient.connect(url);
+                    const db = client.db(dbName);
+                    const col = await db.collection('books');
+                    const movieDetails = await col.findOne({_id:id});
+                    res.render('details',
+                        {title:'Details Page for '+ id, 
+                        nav:nav,
+                        movies:movieDetails})
+                }
+                catch(err){
+                    console.log(err)
+                }
+                client.close();
+            }())
+           
+        });
     
     return moviesRouter
 }
 
 
 module.exports= router;
+
+
+/*
+
+iffi
+
+function add(a,b){
+    return a+b
+}
+add(1,2)
+
+(function add(a,b){
+    return a+b
+}())
+*/
             

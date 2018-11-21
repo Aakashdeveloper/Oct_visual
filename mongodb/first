@@ -35,3 +35,40 @@ db.second.insert({
 
 db.first.find({qty:{order:12}})
 db.first.find({qty:{order:12:{$gt:10}}})
+
+
+
+
+sno | hindi | ENGLISH | Computer
+1   | 90    |         |
+2   |       | 90      |
+3   | 89    |         | 90
+
+
+JavaScript
+
+{
+    sno:1
+    hindi:90   
+},
+{
+    sno:2,
+    english:90
+},
+{
+    sno:3
+    hindi:89,
+    Computer: 90
+}
+
+normals crud
+Joins => Lookups
+aggregations
+Geo
+
+
+replications
+sharding <= DBA
+import / export
+auth
+read / write 

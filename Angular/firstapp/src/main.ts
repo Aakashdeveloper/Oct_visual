@@ -10,3 +10,10 @@ if (environment.production) {
 
 platformBrowserDynamic().bootstrapModule(AppModule)
   .catch(err => console.log(err));
+
+  /*
+  Module=> All Declration happen
+  Component=> Contains Html css and logics
+  Pipe=> help to do runtime data change
+  Service=>help to do dependency injection & connect to third party
+  */

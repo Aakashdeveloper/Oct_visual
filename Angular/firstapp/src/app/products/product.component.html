@@ -48,7 +48,10 @@
                         <td [ngStyle]="{'background-color':prod.price<20 ? 'green': 'orange'}">
                             {{prod.price  | discountPipe:5 | currency:'AUD'  }}
                         </td>
-                        <td>{{prod.starRating}}</td>
+                        <td>
+                            <app-star [rating]="prod.starRating"
+                                (ratingClicked)="onDataRecieve($event)"></app-star>
+                        </td>
                     </tr>
                </tbody>
            </table>

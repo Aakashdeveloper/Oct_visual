@@ -1,5 +1,7 @@
-import { Component} from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { Customer} from '../models/customerForm.model';
+import { NgForm} from '@angular/forms';
+import { FormPosterService } from '../services/formPoster.service';
 
 @Component({
     selector: 'app-form',
@@ -9,7 +11,10 @@ import { Customer} from '../models/customerForm.model';
 
 export class FormComponent {
     languages: any[] = ['AngularJS', 'NodeJS', 'ReactJs'];
-    model = new Customer('John', '', '', true, '', '');
+    model = new Customer('John', 'andrew', 'a@a.com', true, 'male', 'AngularJS');
+    hasCodelangError: Boolean = false;
+
+    constructor(private _FormPosterService: FormPosterService) {}
 
     firstToUpper(value: string): void {
         if (value.length > 0) {
@@ -17,6 +22,21 @@ export class FormComponent {
         } else {
             this.model.firstName = value;
         }
+    }
+
+    validateCodeLang(event): void {
+        if (this.model.codelang === 'default') {
+            this.hasCodelangError = true;
+        } else {
+            this.hasCodelangError = false;
+        }
+    }
+
+
+    submitForm(form: NgForm): void {
+        // console.log(form.value)
+        this._FormPosterService.postEmployee(form.value)
+            .subscribe((data) => console.log('success'));
     }
 }
 

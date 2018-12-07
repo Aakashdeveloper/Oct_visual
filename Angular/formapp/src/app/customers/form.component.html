@@ -79,20 +79,26 @@
                                 Male
                     </label>
             </div>
-            <div class="form-group">
+            <div class="form-group" [class.has-error]="hasCodelangError">
                 <label for="codelang"
                     class="control-label"
                 >CodeLang</label>
                 <select class="form-control"
                         name="codelang"
                         id="codelang"
-                        [(ngModel)]="model.codelang">
+                        [(ngModel)]="model.codelang"
+                        (blur)="validateCodeLang($event)">
+                        <option value="default">Select Code Lang</option>
                         <option *ngFor="let lang of languages">
                             {{lang}}
                         </option>
                 </select>
+                <div class="alert alert-danger" *ngIf="hasCodelangError">
+                    Please select valid option
+                </div>
             </div>
-            <button type="submit" class="btn btn-success">Submit</button>
+            <button type="submit" class="btn btn-success"
+                [disabled]="hasCodelangError">Submit</button>
         </form>
     </div>
 </div>
